@@ -50,7 +50,7 @@ If the input graph is empty, return $0$;
 If the input graph $G$ has a vertex $v$ without any neighbors, return $1+R_0(G[V-v])$
 \item
 Otherwise find a vertex $u$ of maximum degree (if there are several
-any will do) and return $\max(1+R_0(G[V-N[u]]), 
+any will do) and return $\max(R_0(G[V-N[u]]), 
 R_0(G[V-u]))$.
 \end{enumerate}
 
