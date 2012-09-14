@@ -192,13 +192,13 @@ graph $G=(V,E)$.
       \node[remaining node] (8) [above of=7] {};
       \node[remaining node] (9) [above right of=2] {};
 
-      \path[thin,dashed, every node/.style={}]
+      \path[removed edge]
       (1) edge node {} (2)
           edge node {} (3)
           edge node {} (4)
           edge node {} (5)
           edge node {} (6);
-      \path[every node/.style={}]
+      \path[remaining edge]
       (4) edge node {} (5)
       (6) edge node {} (7)
       (7) edge node {} (8)
