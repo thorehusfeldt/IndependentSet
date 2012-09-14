@@ -50,22 +50,28 @@ graph $G=(V,E)$.
 \item If the input graph $G$ has a vertex $v$ without any neighbors,
   return $1+R_0(G[V-v]).$
 
+\tikzset{
+  auto,node distance=15mm,thick,
+  remaining node/.style={thick,circle,draw,minimum size=7mm,fill=black!10},
+  remaining edge/.style={thick},
+  mis node/.style={thin,circle,draw,minimum size=7mm,fill=red!20},
+  removed node/.style={thin,circle,draw,minimum size=7mm},
+  removed edge/.style={thin,dashed}
+}
+
   \begin{fullwidth}
     \begin{tikzpicture}
-      [auto,node distance=15mm,thick,
-      main node/.style={circle,draw,minimum size=7mm,fill=black!10}]
+      \node[remaining node] (1) {};
+      \node[remaining node] (2) [above left of=1] {};
+      \node[remaining node] (3) [above right of=1] {};
+      \node[remaining node] (4) [below left of=1] {};
+      \node[remaining node] (5) [below of=1] {};
+      \node[remaining node] (6) [below right of=1] {};
+      \node[remaining node] (7) [above right of=6] {};
+      \node[remaining node] (8) [above of=7] {};
+      \node[remaining node] (9) [above right of=2] {$v$};
 
-      \node[main node] (1) {};
-      \node[main node] (2) [above left of=1] {};
-      \node[main node] (3) [above right of=1] {};
-      \node[main node] (4) [below left of=1] {};
-      \node[main node] (5) [below of=1] {};
-      \node[main node] (6) [below right of=1] {};
-      \node[main node] (7) [above right of=6] {};
-      \node[main node] (8) [above of=7] {};
-      \node[main node] (9) [above right of=2] {$v$};
-
-      \path[every node/.style={}]
+      \path[remaining edge]
       (1) edge node {} (2)
           edge node {} (3)
           edge node {} (4)
@@ -81,21 +87,17 @@ graph $G=(V,E)$.
     \end{tikzpicture}
     \hspace{1cm}
     \begin{tikzpicture}
-      [auto,node distance=15mm,thick,
-      main node/.style={circle,draw,minimum size=7mm,fill=black!10},
-      removed node/.style={thin,circle,draw,minimum size=7mm}]
+      \node[remaining node] (1) {};
+      \node[remaining node] (2) [above left of=1] {};
+      \node[remaining node] (3) [above right of=1] {};
+      \node[remaining node] (4) [below left of=1] {};
+      \node[remaining node] (5) [below of=1] {};
+      \node[remaining node] (6) [below right of=1] {};
+      \node[remaining node] (7) [above right of=6] {};
+      \node[remaining node] (8) [above of=7] {};
+      \node[mis node] (9) [above right of=2] {$v$};
 
-      \node[main node] (1) {};
-      \node[main node] (2) [above left of=1] {};
-      \node[main node] (3) [above right of=1] {};
-      \node[main node] (4) [below left of=1] {};
-      \node[main node] (5) [below of=1] {};
-      \node[main node] (6) [below right of=1] {};
-      \node[main node] (7) [above right of=6] {};
-      \node[main node] (8) [above of=7] {};
-      \node[removed node] (9) [above right of=2] {$v$};
-
-      \path[every node/.style={}]
+      \path[remaining edge]
       (1) edge node {} (2)
           edge node {} (3)
           edge node {} (4)
@@ -119,20 +121,17 @@ graph $G=(V,E)$.
 
   \begin{center}
     \begin{tikzpicture}
-      [auto,node distance=15mm,thick,
-      main node/.style={circle,draw,minimum size=7mm,fill=black!10}]
+      \node[remaining node] (1) {$u$};
+      \node[remaining node] (2) [above left of=1] {};
+      \node[remaining node] (3) [above right of=1] {};
+      \node[remaining node] (4) [below left of=1] {};
+      \node[remaining node] (5) [below of=1] {};
+      \node[remaining node] (6) [below right of=1] {};
+      \node[remaining node] (7) [above right of=6] {};
+      \node[remaining node] (8) [above of=7] {};
+      \node[remaining node] (9) [above right of=2] {};
 
-      \node[main node] (1) {$u$};
-      \node[main node] (2) [above left of=1] {};
-      \node[main node] (3) [above right of=1] {};
-      \node[main node] (4) [below left of=1] {};
-      \node[main node] (5) [below of=1] {};
-      \node[main node] (6) [below right of=1] {};
-      \node[main node] (7) [above right of=6] {};
-      \node[main node] (8) [above of=7] {};
-      \node[main node] (9) [above right of=2] {};
-
-      \path[every node/.style={}]
+      \path[remaining edge]
       (1) edge node {} (2)
           edge node {} (3)
           edge node {} (4)
@@ -152,19 +151,46 @@ graph $G=(V,E)$.
   \end{center}
   \begin{fullwidth}
     \begin{tikzpicture}
-      [auto,node distance=15mm,thick,
-      main node/.style={circle,draw,minimum size=7mm,fill=black!10},
-      removed node/.style={thin,circle,draw,minimum size=7mm}]
+      \node[mis node] (1) {$u$};
+      \node[removed node] (2) [above left of=1] {};
+      \node[removed node] (3) [above right of=1] {};
+      \node[removed node] (4) [below left of=1] {};
+      \node[removed node] (5) [below of=1] {};
+      \node[removed node] (6) [below right of=1] {};
+      \node[remaining node] (7) [above right of=6] {};
+      \node[remaining node] (8) [above of=7] {};
+      \node[remaining node] (9) [above right of=2] {};
 
+      \path[removed edge]
+      (1) edge node {} (2)
+          edge node {} (3)
+          edge node {} (4)
+          edge node {} (5)
+          edge node {} (6)
+      (4) edge node {} (5)
+      (3) edge node {} (9)
+          edge node {} (8)
+      (6) edge node {} (7)
+      (2) edge node {} (9);
+      \path[remaining edge]
+      (7) edge node {} (8);
+
+        \node [below=5mm, align=flush center, text width=6cm] at (5) {
+          Assume $u$ is in the MIS -- remove $u$ and its neighbors,
+          since the neighbors can no longer be in the MIS.
+        };
+    \end{tikzpicture}
+    \hspace{1cm}
+    \begin{tikzpicture}
       \node[removed node] (1) {$u$};
-      \node[main node] (2) [above left of=1] {};
-      \node[main node] (3) [above right of=1] {};
-      \node[main node] (4) [below left of=1] {};
-      \node[main node] (5) [below of=1] {};
-      \node[main node] (6) [below right of=1] {};
-      \node[main node] (7) [above right of=6] {};
-      \node[main node] (8) [above of=7] {};
-      \node[main node] (9) [above right of=2] {};
+      \node[remaining node] (2) [above left of=1] {};
+      \node[remaining node] (3) [above right of=1] {};
+      \node[remaining node] (4) [below left of=1] {};
+      \node[remaining node] (5) [below of=1] {};
+      \node[remaining node] (6) [below right of=1] {};
+      \node[remaining node] (7) [above right of=6] {};
+      \node[remaining node] (8) [above of=7] {};
+      \node[remaining node] (9) [above right of=2] {};
 
       \path[thin,dashed, every node/.style={}]
       (1) edge node {} (2)
@@ -180,43 +206,8 @@ graph $G=(V,E)$.
           edge node {} (8)
       (2) edge node {} (9);
 
-        \node [below=5mm, align=flush center, text width=7cm] at (5) {
-          Assume $u$ not in the MIS -- just remove $u$.
-        };
-    \end{tikzpicture}
-    \hspace{1cm}
-    \begin{tikzpicture}
-      [auto,node distance=15mm,thick,
-      main node/.style={circle,draw,minimum size=7mm,fill=black!10},
-      removed node/.style={thin,circle,draw,minimum size=7mm}]
-
-      \node[removed node] (1) {$u$};
-      \node[removed node] (2) [above left of=1] {};
-      \node[removed node] (3) [above right of=1] {};
-      \node[removed node] (4) [below left of=1] {};
-      \node[removed node] (5) [below of=1] {};
-      \node[removed node] (6) [below right of=1] {};
-      \node[main node] (7) [above right of=6] {};
-      \node[main node] (8) [above of=7] {};
-      \node[main node] (9) [above right of=2] {};
-
-      \path[thin,dashed, every node/.style={}]
-      (1) edge node {} (2)
-          edge node {} (3)
-          edge node {} (4)
-          edge node {} (5)
-          edge node {} (6)
-      (4) edge node {} (5)
-      (3) edge node {} (9)
-          edge node {} (8)
-      (6) edge node {} (7)
-      (2) edge node {} (9);
-      \path[every node/.style={}]
-      (7) edge node {} (8);
-
-        \node [below=5mm, align=flush center, text width=5cm] at (5) {
-          Assume $u$ is in the MIS -- remove $u$ and its neighbors,
-          since the neighbors can no longer be in the MIS.
+        \node [below=5mm, align=flush center, text width=6cm] at (5) {
+          Assume $u$ is not in the MIS -- just remove $u$.
         };
     \end{tikzpicture}
   \end{fullwidth}
